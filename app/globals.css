@@ -1,0 +1,456 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+@layer base {
+  :root {
+    --gold: #D4AF37;
+    --matte-black: #0A0A0A;
+    --charcoal: #1C1C1C;
+    --beige: #F5F0E6;
+    --cream: #F5EFE0;
+    --purple: #6B5B95;
+    --plum: #4B3F72;
+    /* Light mode palette from brand */
+    --lm-bg: #F5EFE0;
+    --lm-bg-card: #FDF8F0;
+    --lm-text: #2C2C2C;
+    --lm-heading: #3D2B6B;
+    --lm-subtext: #5A5A6A;
+    --lm-border: rgba(107, 91, 149, 0.25);
+  }
+
+  body {
+    @apply bg-cream dark:bg-matte-black text-gray-900 dark:text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cormorant);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  p, span, div, a, button {
+    font-family: var(--font-inter);
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0.15) 20%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.15) 80%,
+      rgba(255, 255, 255, 0.45) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10;
+  }
+
+  .glass-light {
+    @apply bg-white/80 dark:bg-charcoal/80 backdrop-blur-xl border border-gray-200/50 dark:border-white/10;
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .btn-luxury {
+    @apply px-5 py-2.5 bg-gold text-black text-sm font-semibold transition-all duration-300;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-luxury::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-luxury:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .btn-luxury:hover {
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .card-luxury {
+    @apply glass-light p-5 transition-all duration-300 hover:shadow-xl;
+    border-radius: 4px;
+  }
+
+  /* Mobile width fixes */
+  .mobile-safe {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mobile-form {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Contact section specific mobile fixes */
+  @media (max-width: 640px) {
+    #contact .grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    #contact .bg-white\/95,
+    #contact .dark\:bg-charcoal\/80 {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    #contact input,
+    #contact select,
+    #contact textarea {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    #contact .flex {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================
+   LIGHT MODE BRAND COLOR OVERRIDES
+   Screenshot palette: warm cream bg, deep purple headings,
+   dark charcoal body text, gold accents
+   ============================================= */
+
+/* Hero banner always stays black — it's a video section */
+html:not(.dark) .hero-banner,
+.hero-banner {
+  background-color: #000000 !important;
+}
+
+html:not(.dark) .hero-banner h1,
+html:not(.dark) .hero-banner h2,
+html:not(.dark) .hero-banner h3 {
+  color: transparent !important;
+}
+
+html:not(.dark) .hero-banner p {
+  color: #ffffff !important;
+}
+
+/* Footer always dark — same as dark mode */
+html:not(.dark) footer,
+footer {
+  background-color: #1C1C1C !important;
+  color: #d1d5db !important;
+}
+
+html:not(.dark) footer h3,
+html:not(.dark) footer h4,
+html:not(.dark) footer p,
+html:not(.dark) footer span,
+html:not(.dark) footer a {
+  color: #d1d5db !important;
+}
+
+html:not(.dark) footer .text-gray-300 {
+  color: #d1d5db !important;
+}
+
+html:not(.dark) footer .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+html:not(.dark) footer .text-gray-500 {
+  color: #6b7280 !important;
+}
+
+html:not(.dark) footer .text-gold,
+html:not(.dark) footer [class*="text-gold"] {
+  color: #D4AF37 !important;
+}
+
+html:not(.dark) footer .hover\:text-gold:hover {
+  color: #D4AF37 !important;
+}
+
+/* Mobile: reduce section heading and description sizes */
+@media (max-width: 640px) {
+  /* Section h2 headings smaller on mobile */
+  section h2 {
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 1.2 !important;
+  }
+
+  /* Page h1 headings slightly smaller on mobile */
+  section h1 {
+    font-size: 2rem !important; /* 32px */
+    line-height: 1.2 !important;
+  }
+
+  /* Section subtitle/description paragraphs */
+  section .text-center p,
+  section [class*="mb-8"] > p,
+  section [class*="mb-12"] > p {
+    font-size: 14px !important;
+  }
+}
+
+:root:not(.dark) body,
+html:not(.dark) body {
+  background-color: #F5EFE0;
+  color: #2C2C2C;
+}
+
+/* Section backgrounds */
+html:not(.dark) .bg-cream,
+html:not(.dark) .bg-white,
+html:not(.dark) .bg-white\/95,
+html:not(.dark) .bg-white\/98 {
+  background-color: #FDF8F0 !important;
+}
+
+html:not(.dark) section {
+  background-color: #F5EFE0;
+}
+
+html:not(.dark) .bg-charcoal\/50 {
+  background-color: #EDE5D0 !important;
+}
+
+/* Headings — deep purple */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) h4,
+html:not(.dark) h5,
+html:not(.dark) h6 {
+  color: #3D2B6B;
+}
+
+/* Body text — dark charcoal */
+html:not(.dark) p,
+html:not(.dark) span:not(.text-gold):not([class*="text-gold"]),
+html:not(.dark) li,
+html:not(.dark) label {
+  color: #2C2C2C;
+}
+
+/* Subtext / muted text */
+html:not(.dark) .text-gray-600,
+html:not(.dark) .text-gray-700,
+html:not(.dark) .text-gray-400,
+html:not(.dark) .text-gray-300 {
+  color: #5A5A6A !important;
+}
+
+/* text-black overrides in light mode → deep charcoal */
+html:not(.dark) .text-black {
+  color: #2C2C2C !important;
+}
+
+/* Cards */
+html:not(.dark) .glass-light {
+  background-color: rgba(253, 248, 240, 0.92) !important;
+  border-color: rgba(107, 91, 149, 0.2) !important;
+}
+
+html:not(.dark) [class*="border-gold"] {
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+html:not(.dark) [class*="border-gold\/40"] {
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+html:not(.dark) [class*="border-gold\/60"] {
+  border-color: rgba(212, 175, 55, 0.6) !important;
+}
+
+/* Card backgrounds */
+html:not(.dark) .backdrop-blur-xl.border-2 {
+  background-color: rgba(253, 248, 240, 0.95) !important;
+}
+
+/* Navbar */
+html:not(.dark) nav,
+html:not(.dark) header {
+  background-color: rgba(245, 239, 224, 0.95) !important;
+}
+
+/* Input fields */
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea {
+  background-color: #FDF8F0 !important;
+  color: #2C2C2C !important;
+  border-color: rgba(107, 91, 149, 0.3) !important;
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #9090A0 !important;
+}
+
+/* Icon accent backgrounds — purple tint */
+html:not(.dark) .from-gold\/30 {
+  --tw-gradient-from: rgba(107, 91, 149, 0.2) !important;
+}
+html:not(.dark) .to-gold\/15 {
+  --tw-gradient-to: rgba(107, 91, 149, 0.1) !important;
+}
+
+/* Stats / gradient band */
+html:not(.dark) .from-gold\/20 {
+  --tw-gradient-from: rgba(107, 91, 149, 0.12) !important;
+}
+html:not(.dark) .via-purple\/15 {
+  --tw-gradient-via: rgba(107, 91, 149, 0.08) !important;
+}
+html:not(.dark) .to-gold\/20 {
+  --tw-gradient-to: rgba(212, 175, 55, 0.12) !important;
+}
+
+/* Testimonials section */
+html:not(.dark) #testimonials {
+  background-color: #EDE5D0 !important;
+}
+
+/* FAQ section */
+html:not(.dark) #faq {
+  background-color: #F5EFE0 !important;
+}
+
+/* Services section */
+html:not(.dark) #services {
+  background-color: #FDF8F0 !important;
+}
+
+/* Why choose us */
+html:not(.dark) #why-choose-us {
+  background-color: #EDE5D0 !important;
+}
+
+/* Contact section */
+html:not(.dark) #contact {
+  background-color: #F5EFE0 !important;
+}
+
+/* About section */
+html:not(.dark) #about {
+  background-color: #FDF8F0 !important;
+}
+
+/* Heading italic gold spans stay gold */
+html:not(.dark) .text-gold {
+  color: #D4AF37 !important;
+}
+
+/* Dark text on gold buttons stays black */
+html:not(.dark) .bg-gold {
+  background-color: #D4AF37 !important;
+  color: #1A1A1A !important;
+}
+
+/* Border on gold buttons */
+html:not(.dark) .border-gold {
+  border-color: #D4AF37 !important;
+  color: #3D2B6B !important;
+}
+
+/* Hover border gold */
+html:not(.dark) .hover\:border-gold\/60:hover {
+  border-color: rgba(212, 175, 55, 0.6) !important;
+}
+
+/* Scrollbar */
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #F5EFE0;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: rgba(107, 91, 149, 0.4);
+}
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 91, 149, 0.7);
+}

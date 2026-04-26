@@ -1,0 +1,31 @@
+# Sai Digital Services - LLM Summary
+
+Business Name: Sai Digital Services
+Website: https://saidigitalservices.in
+Contact: +91 6304484048
+Email: contact@saidigitalservices.in
+Location: Mogalthuru, West Godavari, Andhra Pradesh, India
+
+## Services
+- Website Development (responsive, SEO-optimized, fast-loading)
+- SEO Optimization (on-page, technical, local SEO)
+- Digital Marketing (Google Ads, lead generation, ROI tracking)
+- Social Media Management (Instagram, Facebook)
+- Branding Strategy (brand identity, visual guidelines)
+- Website Maintenance (security, updates, support)
+
+## Service Areas
+- Andhra Pradesh
+- Telangana
+- Hyderabad
+- Vijayawada
+- Visakhapatnam
+- Rajahmundry
+- Bhimavaram
+- West Godavari
+
+## About
+3+ years experience. Specializes in helping small and medium businesses establish a strong online presence through modern web development and digital marketing.
+
+## Technologies
+React, Next.js, Tailwind CSS, SEO tools, Google Analytics, Meta Business Suite
