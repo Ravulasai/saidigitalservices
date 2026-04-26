@@ -1,11 +1,12 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 
 export default function HeroBanner() {
   const videoRef = useRef(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -27,8 +28,9 @@ export default function HeroBanner() {
     };
 
     const handleCanPlay = () => {
+      setVideoReady(true);
       video.play().catch(() => {});
-      animateOpacity(0, 1, 500);
+      animateOpacity(0, 1, 800);
     };
 
     const handleTimeUpdate = () => {
@@ -47,8 +49,8 @@ export default function HeroBanner() {
       }, 100);
     };
 
+    // Don't block — start loading in background, opacity stays 0 until ready
     video.style.opacity = '0';
-    video.play().catch(() => {});
 
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('timeupdate', handleTimeUpdate);
@@ -68,17 +70,16 @@ export default function HeroBanner() {
       style={{ backgroundColor: '#000000' }}
       aria-label="Hero banner - Give Our Brains to Your Business"
     >
-      {/* Background Video */}
+      {/* Video loads in background — never blocks page render */}
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover object-bottom"
         muted
-        autoPlay
         playsInline
-        preload="metadata"
+        preload="none"
         loop={false}
         aria-hidden="true"
-        style={{ opacity: 0 }}
+        style={{ opacity: 0, transition: 'none' }}
       >
         <source
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4"
@@ -86,16 +87,16 @@ export default function HeroBanner() {
         />
       </video>
 
-      {/* Navbar */}
+      {/* Navbar — renders immediately */}
       <Navbar />
 
-      {/* Hero Content */}
+      {/* Hero content — renders immediately, no waiting for video */}
       <div className="relative z-10 flex-1 flex items-start md:items-end justify-start px-6 py-12 pt-20 md:pt-12 md:pb-20">
         <div className="max-w-2xl">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-2 text-left max-w-md md:max-w-lg"
             style={{
               fontFamily: 'var(--font-cormorant)',
@@ -113,7 +114,7 @@ export default function HeroBanner() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
             className="leading-relaxed mb-8 max-w-md md:max-w-lg"
             style={{
               fontFamily: 'var(--font-inter)',
@@ -125,6 +126,25 @@ export default function HeroBanner() {
           </motion.p>
         </div>
       </div>
+
+      {/* Start loading video only after page is interactive */}
+      <VideoLoader videoRef={videoRef} />
     </section>
   );
+}
+
+// Deferred video src injection — loads video after page paint
+function VideoLoader({ videoRef }) {
+  useEffect(() => {
+    // Wait for next frame after paint, then trigger video load
+    const raf = requestAnimationFrame(() => {
+      const video = videoRef.current;
+      if (video && !video.src) {
+        video.load();
+      }
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [videoRef]);
+
+  return null;
 }
