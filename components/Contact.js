@@ -121,7 +121,7 @@ export default function Contact({ showHeading = true }) {
               className="text-black dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
               style={{ fontFamily: 'var(--font-inter)', fontSize: '16px' }}
             >
-              Let's grow together - tell us about your business and we'll craft the right digital strategy for you
+              Let&apos;s grow together - tell us about your business and we&apos;ll craft the right digital strategy for you
             </p>
           </motion.div>
         )}
@@ -320,7 +320,7 @@ export default function Contact({ showHeading = true }) {
                   </>
                 ) : (
                   <>
-                    <span>Let's Grow Together</span>
+                    <span>Let&apos;s Grow Together</span>
                     <FiSend size={14} />
                   </>
                 )}
@@ -344,7 +344,7 @@ export default function Contact({ showHeading = true }) {
                   className="p-3 sm:p-4 bg-green-500/20 border-2 border-green-500/50 text-green-600 dark:text-green-400 text-center"
                   style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
                 >
-                  Thank you! We'll contact you soon.
+                  Thank you! We&apos;ll contact you soon.
                 </motion.div>
               )}
             </form>

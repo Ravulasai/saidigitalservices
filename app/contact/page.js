@@ -34,7 +34,7 @@ export default function ContactPage() {
               className="text-black dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
               style={{ fontFamily: 'var(--font-inter)', fontSize: '16px' }}
             >
-              Ready to grow together? Let's talk about your business and build something great
+              Ready to grow together? Let&apos;s talk about your business and build something great
             </p>
           </motion.div>
         </div>

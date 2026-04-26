@@ -66,7 +66,7 @@ export default function Hero() {
                 className="px-5 py-2.5 bg-gold text-black text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-gold/50"
                 style={{ borderRadius: '2px' }}
               >
-                Let's Grow Together
+                Let&apos;s Grow Together
               </Link>
               <button
                 onClick={openWhatsApp}

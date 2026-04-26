@@ -16,7 +16,7 @@ export default function MobileCTA() {
         style={{ borderRadius: '2px' }}
         aria-label="Contact us - Let's Grow Together"
       >
-        Let's Grow Together
+        Let&apos;s Grow Together
       </Link>
     </motion.div>
   );

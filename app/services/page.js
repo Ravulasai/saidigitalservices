@@ -233,7 +233,7 @@ export default function ServicesPage() {
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-black font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-gold/50 hover:scale-105 group w-full justify-center"
                     style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
                   >
-                    <span>Let's Grow Together</span>
+                    <span>Let&apos;s Grow Together</span>
                     <FiArrowRight className="group-hover:translate-x-1 transition-transform duration-300" size={14} />
                   </Link>
                 </motion.div>
@@ -265,7 +265,7 @@ export default function ServicesPage() {
               className="text-black dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
               style={{ fontFamily: 'var(--font-inter)', fontSize: '16px' }}
             >
-              Let's build something great - reach out and we'll craft a digital strategy tailored to your business goals
+              Let&apos;s build something great - reach out and we&apos;ll craft a digital strategy tailored to your business goals
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -273,7 +273,7 @@ export default function ServicesPage() {
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gold text-black font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-gold/50 group"
                 style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '16px' }}
               >
-                <span>Let's Grow Together</span>
+                <span>Let&apos;s Grow Together</span>
                 <FiArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
               </Link>
               <Link
