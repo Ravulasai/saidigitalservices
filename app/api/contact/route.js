@@ -144,10 +144,10 @@ function customerEmailHtml({ name, service, message }) {
 }
 
 /* ─── Admin notification email ─── */
-function adminEmailHtml({ name, phone, countryCode, email, businessName, service, message }) {
+function adminEmailHtml({ name, phone, email, businessName, service, message }) {
   const rows = [
     ['Name', name],
-    ['Phone', `${countryCode} ${phone}`],
+    ['Phone', phone],
     ['Email', email],
     ['Business', businessName || '—'],
     ['Service', service || '—'],
@@ -246,7 +246,8 @@ function adminEmailHtml({ name, phone, countryCode, email, businessName, service
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { name, phone, countryCode, email, businessName, service, message } = body;
+    const { name, phone, email, businessName, service, message } = body;
+    const fullPhone = `+91 ${phone}`;
 
     // Send both emails in parallel
     const [customerResult, adminResult] = await Promise.all([
@@ -260,7 +261,7 @@ export async function POST(request) {
         from: `Sai Digital Services <${process.env.FROM_EMAIL}>`,
         to: [process.env.ADMIN_EMAIL],
         subject: `New Lead: ${name} - ${service || 'General Enquiry'}`,
-        html: adminEmailHtml({ name, phone, countryCode, email, businessName, service, message }),
+        html: adminEmailHtml({ name, phone: fullPhone, email, businessName, service, message }),
         replyTo: email,
       }),
     ]);

@@ -16,21 +16,9 @@ export default function Contact({ showHeading = true }) {
     businessName: '',
     service: '',
     message: '',
-    countryCode: '+91',
   });
   const [errors, setErrors] = useState({});
   const [showSuccess, setShowSuccess] = useState(false);
-
-  const countryCodes = [
-    { code: '+91', country: 'India', flag: '🇮🇳' },
-    { code: '+1', country: 'USA', flag: '🇺🇸' },
-    { code: '+44', country: 'UK', flag: '🇬🇧' },
-    { code: '+61', country: 'Australia', flag: '🇦🇺' },
-    { code: '+971', country: 'UAE', flag: '🇦🇪' },
-    { code: '+65', country: 'Singapore', flag: '🇸🇬' },
-    { code: '+49', country: 'Germany', flag: '🇩🇪' },
-    { code: '+33', country: 'France', flag: '🇫🇷' },
-  ];
 
   const services = [
     'Website Development',
@@ -79,7 +67,7 @@ export default function Contact({ showHeading = true }) {
       if (!res.ok) throw new Error('Failed to send');
 
       setShowSuccess(true);
-      setFormData({ name: '', phone: '', email: '', businessName: '', service: '', message: '', countryCode: '+91' });
+      setFormData({ name: '', phone: '', email: '', businessName: '', service: '', message: '' });
       setTimeout(() => setShowSuccess(false), 6000);
     } catch {
       setSubmitError('Something went wrong. Please try again or call us directly.');
@@ -228,33 +216,40 @@ export default function Contact({ showHeading = true }) {
                 <label htmlFor="name" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Name *</label>
                 <input
                   type="text" id="name" name="name" value={formData.name} onChange={handleChange}
+                  aria-label="Your full name"
+                  aria-required="true"
                   className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 ${errors.name ? 'border-red-500' : 'border-gold/30 dark:border-white/20'} focus:border-gold focus:outline-none transition-colors`}
                   style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
                   placeholder="Your name"
                 />
-                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                {errors.name && <p className="text-red-500 text-xs mt-1" role="alert">{errors.name}</p>}
               </div>
 
               <div>
                 <label htmlFor="phone" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Phone *</label>
-                <div className="flex gap-1 sm:gap-2 w-full">
-                  <select
-                    name="countryCode" value={formData.countryCode} onChange={handleChange}
-                    className="px-1 sm:px-2 lg:px-3 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 border-gold/30 dark:border-white/20 focus:border-gold focus:outline-none transition-colors flex-shrink-0"
-                    style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px', minWidth: '70px', maxWidth: '90px' }}
+                <div className="flex gap-0 w-full">
+                  <span
+                    aria-label="India country code +91"
+                    className="inline-flex items-center px-3 py-2 sm:py-3 bg-gold/20 dark:bg-gold/10 border-2 border-r-0 border-gold/30 dark:border-white/20 text-black dark:text-white font-semibold flex-shrink-0"
+                    style={{ borderRadius: '4px 0 0 4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
                   >
-                    {countryCodes.map(country => (
-                      <option key={country.code} value={country.code} className="bg-white dark:bg-charcoal text-black dark:text-white">{country.flag} {country.code}</option>
-                    ))}
-                  </select>
+                    🇮🇳 +91
+                  </span>
                   <input
-                    type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange}
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    aria-label="Phone number (10-digit Indian mobile number)"
                     className={`flex-1 min-w-0 px-2 sm:px-3 lg:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 ${errors.phone ? 'border-red-500' : 'border-gold/30 dark:border-white/20'} focus:border-gold focus:outline-none transition-colors`}
-                    style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                    style={{ borderRadius: '0 4px 4px 0', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
                     placeholder="10-digit mobile number"
+                    maxLength={10}
+                    inputMode="numeric"
                   />
                 </div>
-                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                {errors.phone && <p className="text-red-500 text-xs mt-1" role="alert">{errors.phone}</p>}
               </div>
 
               <div>
