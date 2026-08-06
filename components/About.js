@@ -71,11 +71,53 @@ export default function About({ showHeading = true }) {
   ];
 
   return (
-    <section id="about" ref={ref} className="pt-5 pb-8 px-4 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="about" ref={ref} className="py-16 md:py-24 px-4 relative overflow-hidden">
+      {/* Background Elements with Animation */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none" />
-      <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl" />
+      
+      {/* Animated Floating Orbs */}
+      <motion.div 
+        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, 30, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, -40, 0],
+          y: [0, 40, 0],
+          scale: [1, 1.15, 1]
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      
+      {/* Additional Animated Element */}
+      <motion.div 
+        className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple/5 rounded-full blur-2xl"
+        animate={{ 
+          opacity: [0.3, 0.8, 0.3],
+          scale: [0.8, 1.3, 0.8]
+        }}
+        transition={{ 
+          duration: 6, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
       
       <div className="max-w-7xl mx-auto relative z-10">
 

@@ -42,11 +42,53 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" ref={ref} className="pt-5 pb-8 px-4 bg-white dark:bg-charcoal/50 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="services" ref={ref} className="py-16 md:py-24 px-4 bg-white dark:bg-charcoal/50 relative overflow-hidden">
+      {/* Background Elements with Animation */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none" />
-      <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl" />
+      
+      {/* Animated Flowing Waves */}
+      <motion.div 
+        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
+        animate={{ 
+          y: [0, -40, 0],
+          x: [0, 20, 0],
+          opacity: [0.5, 1, 0.5]
+        }}
+        transition={{ 
+          duration: 7, 
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
+        animate={{ 
+          y: [0, 30, 0],
+          x: [0, -30, 0],
+          opacity: [0.5, 0.8, 0.5]
+        }}
+        transition={{ 
+          duration: 9, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.5
+        }}
+      />
+      
+      {/* Pulsing Center Orb */}
+      <motion.div 
+        className="absolute top-1/3 right-1/4 w-32 h-32 bg-gold/5 rounded-full blur-2xl"
+        animate={{ 
+          scale: [1, 1.5, 1],
+          opacity: [0.2, 0.6, 0.2]
+        }}
+        transition={{ 
+          duration: 5, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1.5
+        }}
+      />
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}

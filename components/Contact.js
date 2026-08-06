@@ -83,11 +83,55 @@ export default function Contact({ showHeading = true }) {
   };
 
   return (
-    <section id="contact" ref={ref} className="pt-5 pb-8 px-3 sm:px-4 bg-cream dark:bg-charcoal/50 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none" />
-      <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl" />
+    <section id="contact" ref={ref} className="py-16 md:py-24 px-3 sm:px-4 bg-cream dark:bg-charcoal/50 relative overflow-hidden">
+      {/* Background Elements with Animation */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none"
+      />
+      
+      {/* Animated Flowing Orbs */}
+      <motion.div 
+        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, 50, 0],
+          y: [0, -40, 0],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, -60, 0],
+          y: [0, 50, 0],
+          scale: [1, 1.15, 1]
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1.5
+        }}
+      />
+      
+      {/* Center Pulsing Element */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gold/5 rounded-full blur-2xl"
+        animate={{ 
+          scale: [1, 1.6, 1],
+          opacity: [0.2, 0.5, 0.2]
+        }}
+        transition={{ 
+          duration: 7, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10 w-full">
 

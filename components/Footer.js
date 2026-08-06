@@ -1,142 +1,238 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaWhatsapp } from 'react-icons/fa';
-import { FiPhone, FiMail, FiHeart } from 'react-icons/fi';
+import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FiPhone, FiMail } from 'react-icons/fi';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-charcoal border-t border-gold/20 py-12 px-4 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute top-0 left-1/4 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-purple/10 rounded-full blur-3xl" />
+    <footer className="bg-white dark:bg-[#0f0d0a] border-t border-gold/30 relative overflow-hidden">
+      {/* Background Elements with Animation */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold/5 to-transparent pointer-events-none" />
+      <motion.div 
+        className="absolute top-0 left-1/3 w-48 h-48 bg-gold/8 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, 40, 0],
+          y: [0, -50, 0],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple/8 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, -60, 0],
+          y: [0, 40, 0],
+          scale: [1, 1.15, 1]
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
       
-      <div className="max-w-4xl mx-auto relative z-10">
-        {/* Main Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-left lg:text-center px-4 lg:px-0"
-        >
-          {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mb-6 lg:mb-8 text-left lg:text-center"
-          >
-            <h3 
-              className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 lg:mb-3"
-              style={{ 
-                fontFamily: 'var(--font-cormorant)',
-                backgroundImage: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}
+      <div className="max-w-7xl mx-auto relative z-10">
+        
+        {/* Main Footer Content */}
+        <div className="py-8 md:py-12 px-4 md:px-8">
+          
+          {/* Main Grid - 3 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
+            
+            {/* Left Column - Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center md:items-start text-center md:text-left"
             >
-              Sai Digital Services
-            </h3>
-            <p 
-              className="text-gray-300 max-w-xl lg:max-w-2xl mx-auto lg:mx-auto leading-relaxed px-0 lg:px-0"
-              style={{ fontFamily: 'var(--font-inter)', fontSize: '12px' }}
-            >
-              Transforming ideas into digital excellence with innovative solutions
-            </p>          </motion.div>
+              <div className="mb-8">
+                <div className="inline-flex items-center gap-3 mb-4 p-4 bg-gold/10 rounded-lg border border-gold/30">
+                  <FiMail className="text-gold" size={24} />
+                  <h3 
+                    className="text-gold font-bold uppercase tracking-widest text-sm"
+                    style={{ fontFamily: 'var(--font-inter)' }}
+                  >
+                    Email
+                  </h3>
+                </div>
+                <motion.a
+                  href="mailto:sairavula1919@gmail.com"
+                  className="text-gray-800 dark:text-gray-300 hover:text-gold transition-colors text-sm block font-semibold"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  sairavula1919@gmail.com
+                </motion.a>
+              </div>
 
-          {/* Contact Links */}
+              <div className="mb-8">
+                <p 
+                  className="text-gray-700 dark:text-gray-500 text-sm mb-2 font-bold uppercase tracking-wide"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                >
+                  Location
+                </p>
+                <p 
+                  className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-medium"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                >
+                  Andhra Pradesh, India
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Center Column - Brand & Logo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex flex-col justify-center items-center"
+            >
+              <motion.div
+                animate={{ 
+                  y: [0, -12, 0],
+                }}
+                transition={{ 
+                  duration: 5, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="text-center"
+              >
+                <h2 
+                  className="text-3xl md:text-4xl font-black text-gold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-gold via-gold to-gold/70 mb-4"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                >
+                  Sai Digital Services
+                </h2>
+                <p 
+                  className="text-gold dark:text-gold/80 text-sm italic mb-6 font-semibold uppercase tracking-wide"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                >
+                  Digital Excellence
+                </p>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Column - Phone & Social Quick Links */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center md:items-end text-center md:text-right"
+            >
+              <div className="mb-8">
+                <div className="inline-flex items-center gap-3 mb-4 p-4 bg-gold/10 rounded-lg border border-gold/30">
+                  <FiPhone className="text-gold" size={24} />
+                  <h3 
+                    className="text-gold font-bold uppercase tracking-widest text-sm"
+                    style={{ fontFamily: 'var(--font-inter)' }}
+                  >
+                    Phone
+                  </h3>
+                </div>
+                <motion.a
+                  href="tel:+916304484048"
+                  className="text-gray-800 dark:text-gray-300 hover:text-gold transition-colors text-sm block font-semibold"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  +91 6304484048
+                </motion.a>
+              </div>
+
+              <div>
+                <p 
+                  className="text-gray-700 dark:text-gray-500 text-sm mb-3 font-bold uppercase tracking-wide"
+                  style={{ fontFamily: 'var(--font-inter)' }}
+                >
+                  Quick Links
+                </p>
+                <div className="flex gap-4 justify-center md:justify-end">
+                  <motion.a
+                    href="tel:+916304484048"
+                    className="group"
+                    whileHover={{ scale: 1.15, y: -4 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    aria-label="Call"
+                  >
+                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
+                      <FiPhone className="text-gold" size={18} />
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://wa.me/916304484048"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group"
+                    whileHover={{ scale: 1.15, y: -4 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    aria-label="WhatsApp"
+                  >
+                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
+                      <FaWhatsapp className="text-gold" size={18} />
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://www.instagram.com/sai_digital_services_?igsh=aGR0NHowcTR0cmk0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group"
+                    whileHover={{ scale: 1.15, y: -4 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    aria-label="Instagram"
+                  >
+                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
+                      <FaInstagram className="text-gold" size={18} />
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="mailto:sairavula1919@gmail.com"
+                    className="group"
+                    whileHover={{ scale: 1.15, y: -4 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    aria-label="Email"
+                  >
+                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
+                      <FiMail className="text-gold" size={18} />
+                    </div>
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Bottom Copyright Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="flex flex-col items-start lg:items-center lg:flex-row lg:justify-center gap-3 lg:gap-6 mb-6 lg:mb-8 px-0 lg:px-0"
-          >
-            <motion.a
-              href="tel:+916304484048"
-              className="flex items-center gap-2 lg:gap-3 text-gray-300 hover:text-gold transition-all duration-300 group"
-              whileHover={{ scale: 1.05, x: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              aria-label="Call Sai Digital Services at +91 6304484048"
-            >
-              <div className="p-1.5 lg:p-2 bg-gradient-to-br from-gold/20 to-gold/10 group-hover:from-gold/30 group-hover:to-gold/20 transition-colors" style={{ borderRadius: '50%' }}>
-                <FiPhone className="text-gold" size={14} />
-              </div>
-              <span style={{ fontFamily: 'var(--font-inter)', fontSize: '12px', color: 'inherit' }}>
-                +91 6304484048
-              </span>
-            </motion.a>
-
-            <motion.a
-              href="https://wa.me/916304484048?text=Hi,%20what%20can%20I%20help%20you%20with?"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 lg:gap-3 text-gray-300 hover:text-gold transition-all duration-300 group"
-              whileHover={{ scale: 1.05, x: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              aria-label="Chat with Sai Digital Services on WhatsApp"
-            >
-              <div className="p-1.5 lg:p-2 bg-gradient-to-br from-gold/20 to-gold/10 group-hover:from-gold/30 group-hover:to-gold/20 transition-colors" style={{ borderRadius: '50%' }}>
-                <FaWhatsapp className="text-gold" size={14} />
-              </div>
-              <span style={{ fontFamily: 'var(--font-inter)', fontSize: '12px', color: 'inherit' }}>
-                WhatsApp Chat
-              </span>
-            </motion.a>
-
-            <motion.a
-              href="mailto:contact@saidigitalservices.in"
-              className="flex items-center gap-2 lg:gap-3 text-gray-300 hover:text-gold transition-all duration-300 group"
-              whileHover={{ scale: 1.05, x: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              aria-label="Email Sai Digital Services"
-            >
-              <div className="p-1.5 lg:p-2 bg-gradient-to-br from-gold/20 to-gold/10 group-hover:from-gold/30 group-hover:to-gold/20 transition-colors" style={{ borderRadius: '50%' }}>
-                <FiMail className="text-gold" size={14} />
-              </div>
-              <span style={{ fontFamily: 'var(--font-inter)', fontSize: '12px', color: 'inherit' }}>
-                Email Us
-              </span>
-            </motion.a>
-          </motion.div>
-
-          {/* Divider */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="w-16 lg:w-20 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent mx-0 lg:mx-auto mb-5 lg:mb-6"
-          />
-
-          {/* Copyright */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-            className="text-gray-400 px-0 lg:px-0 text-left lg:text-center"
+            className="text-center pt-4"
           >
             <p 
-              className="flex items-center justify-start lg:justify-center gap-2 mb-1 lg:mb-2 text-gray-400"
-              style={{ fontFamily: 'var(--font-inter)', fontSize: '11px' }}
-            >
-              Made with <FiHeart className="text-gold animate-pulse" size={12} /> for your business success
-            </p>
-            <p 
-              className="text-gray-500"
-              style={{ fontFamily: 'var(--font-inter)', fontSize: '10px' }}
+              className="text-gray-700 dark:text-gray-500 text-xs font-semibold"
+              style={{ fontFamily: 'var(--font-inter)' }}
             >
               © {currentYear} Sai Digital Services. All rights reserved.
             </p>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

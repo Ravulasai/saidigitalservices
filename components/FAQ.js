@@ -37,14 +37,56 @@ export default function FAQ({ showHeading = true }) {
   ];
 
   return (
-    <section id="faq" ref={ref} className="pt-5 pb-8 px-4 bg-white dark:bg-charcoal/50 relative overflow-hidden">
+    <section id="faq" ref={ref} className="py-16 md:py-24 px-4 bg-white dark:bg-charcoal/50 relative overflow-hidden">
       
-      {/* Background Elements */}
+      {/* Background Elements with Animation */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none" />
-      <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl" />
       
-      <div className="max-w-4xl mx-auto relative z-10">
+      {/* Animated Ripple Elements */}
+      <motion.div 
+        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.3, 1],
+          opacity: [0.3, 0.8, 0.3],
+          y: [0, -20, 0]
+        }}
+        transition={{ 
+          duration: 6, 
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.7, 0.3],
+          y: [0, 25, 0]
+        }}
+        transition={{ 
+          duration: 7, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      
+      {/* Floating Accent */}
+      <motion.div 
+        className="absolute top-1/2 right-1/3 w-20 h-20 bg-purple/8 rounded-full blur-xl"
+        animate={{ 
+          y: [0, -30, 0],
+          opacity: [0.2, 0.6, 0.2]
+        }}
+        transition={{ 
+          duration: 5, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2.5
+        }}
+      />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header — shown on home page, hidden on /faq page which has its own h1 */}
         {showHeading && (
           <motion.div

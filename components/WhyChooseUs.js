@@ -42,11 +42,53 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section id="why-choose-us" ref={ref} className="pt-5 pb-8 px-4 bg-cream dark:bg-charcoal/50 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="why-choose-us" ref={ref} className="py-16 md:py-24 px-4 bg-cream dark:bg-charcoal/50 relative overflow-hidden">
+      {/* Background Elements with Animation */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none" />
-      <div className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl" />
+      
+      {/* Animated Rotating Orbs */}
+      <motion.div 
+        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
+        animate={{ 
+          rotate: [0, 360],
+          x: [0, 40, 0],
+          y: [0, -30, 0]
+        }}
+        transition={{ 
+          duration: 12, 
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
+        animate={{ 
+          rotate: [360, 0],
+          x: [0, -50, 0],
+          y: [0, 40, 0]
+        }}
+        transition={{ 
+          duration: 14, 
+          repeat: Infinity,
+          ease: "linear",
+          delay: 0.5
+        }}
+      />
+      
+      {/* Breathing Element */}
+      <motion.div 
+        className="absolute top-2/3 right-1/3 w-28 h-28 bg-gold/5 rounded-full blur-2xl"
+        animate={{ 
+          scale: [1, 1.4, 1],
+          opacity: [0.3, 0.7, 0.3]
+        }}
+        transition={{ 
+          duration: 6, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
