@@ -27,9 +27,9 @@ export default function AboutPage() {
           >
             <h1 
               className="text-4xl md:text-5xl lg:text-6xl mb-4 tracking-tight"
-              style={{ fontFamily: 'var(--font-cormorant)' }}
+              style={{ fontFamily: 'var(--font-manrope)' }}
             >
-              About <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant)' }}>Me</span>
+              About <span className="text-gold italic" style={{ fontFamily: 'var(--font-manrope)' }}>Me</span>
             </h1>
             <p 
               className="text-black dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"

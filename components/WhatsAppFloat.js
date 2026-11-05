@@ -8,18 +8,19 @@ export default function WhatsAppFloat() {
     <motion.div
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
-      transition={{ delay: 1, type: 'spring' }}
-      className="fixed bottom-5 right-5 z-30 hidden md:block"
+      transition={{ delay: 1.2, type: 'spring', stiffness: 200 }}
+      /* Only visible on desktop (md+) — mobile uses bottom nav WhatsApp button */
+      className="fixed bottom-6 right-5 z-30 hidden md:block"
     >
       <a
-        href="https://wa.me/916304484048"
+        href="https://wa.me/919010996525"
         target="_blank"
         rel="noopener noreferrer"
-        className="block p-2.5 bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-        style={{ borderRadius: '2px' }}
+        className="flex items-center justify-center w-12 h-12 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-lg hover:shadow-xl transition-all duration-300"
+        style={{ boxShadow: '0 4px 16px rgba(37,211,102,0.45)' }}
         aria-label="Chat on WhatsApp"
       >
-        <FaWhatsapp size={20} />
+        <FaWhatsapp size={22} aria-hidden="true" />
       </a>
     </motion.div>
   );

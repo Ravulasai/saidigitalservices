@@ -26,9 +26,9 @@ export default function ContactPage() {
           >
             <h1 
               className="text-4xl md:text-5xl lg:text-6xl mb-4 tracking-tight"
-              style={{ fontFamily: 'var(--font-cormorant)' }}
+              style={{ fontFamily: 'var(--font-manrope)' }}
             >
-              Get In <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant)' }}>Touch</span>
+              Get In <span className="text-gold italic" style={{ fontFamily: 'var(--font-manrope)' }}>Touch</span>
             </h1>
             <p 
               className="text-black dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"

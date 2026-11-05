@@ -4,154 +4,114 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiDollarSign, FiZap, FiSearch, FiSmartphone, FiHeart, FiTrendingUp } from 'react-icons/fi';
 
+const reasons = [
+  {
+    icon: FiDollarSign,
+    title: 'Affordable Pricing',
+    description: 'Quality services at competitive rates perfect for startups and small businesses in West Godavari.',
+  },
+  {
+    icon: FiZap,
+    title: 'Fast & Modern Designs',
+    description: 'Lightning-fast websites with contemporary designs that impress visitors and convert leads.',
+  },
+  {
+    icon: FiSearch,
+    title: 'SEO Ready',
+    description: 'Built-in SEO optimisation to help your business rank higher in Google search results.',
+  },
+  {
+    icon: FiSmartphone,
+    title: 'Mobile First',
+    description: 'Perfectly optimised for mobile devices where the majority of your customers browse.',
+  },
+  {
+    icon: FiHeart,
+    title: 'Personalised Support',
+    description: 'Dedicated support and guidance throughout your entire digital journey.',
+  },
+  {
+    icon: FiTrendingUp,
+    title: 'Business Growth Focused',
+    description: 'Strategies designed to generate quality leads and grow your revenue consistently.',
+  },
+];
+
 export default function WhyChooseUs() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const reasons = [
-    {
-      icon: FiDollarSign,
-      title: 'Affordable Pricing',
-      description: 'Quality services at competitive rates perfect for startups and small businesses.',
-    },
-    {
-      icon: FiZap,
-      title: 'Fast & Modern Designs',
-      description: 'Lightning-fast websites with contemporary designs that impress visitors.',
-    },
-    {
-      icon: FiSearch,
-      title: 'SEO Ready',
-      description: 'Built-in SEO optimization to help your business rank higher in search results.',
-    },
-    {
-      icon: FiSmartphone,
-      title: 'Mobile First',
-      description: 'Perfectly optimized for mobile devices where most of your customers are.',
-    },
-    {
-      icon: FiHeart,
-      title: 'Personalized Support',
-      description: 'Dedicated support and guidance throughout your digital journey.',
-    },
-    {
-      icon: FiTrendingUp,
-      title: 'Business Growth Focused',
-      description: 'Strategies designed to generate leads and grow your revenue.',
-    },
-  ];
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="why-choose-us" ref={ref} className="py-16 md:py-24 px-4 bg-cream dark:bg-charcoal/50 relative overflow-hidden">
-      {/* Background Elements with Animation */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none" />
-      
-      {/* Animated Rotating Orbs */}
-      <motion.div 
-        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
-        animate={{ 
-          rotate: [0, 360],
-          x: [0, 40, 0],
-          y: [0, -30, 0]
-        }}
-        transition={{ 
-          duration: 12, 
-          repeat: Infinity,
-          ease: "linear"
-        }}
+    <section
+      id="why-choose-us"
+      ref={ref}
+      className="bg-section section-pad relative overflow-hidden"
+      aria-labelledby="why-heading"
+    >
+      {/* Decorative blobs */}
+      <div
+        className="absolute top-0 left-0 w-80 h-80 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: 'radial-gradient(circle at 10% 10%, rgba(107,91,149,0.07) 0%, transparent 55%)' }}
       />
-      <motion.div 
-        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
-        animate={{ 
-          rotate: [360, 0],
-          x: [0, -50, 0],
-          y: [0, 40, 0]
-        }}
-        transition={{ 
-          duration: 14, 
-          repeat: Infinity,
-          ease: "linear",
-          delay: 0.5
-        }}
+      <div
+        className="absolute bottom-0 right-0 w-72 h-72 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: 'radial-gradient(circle at 90% 90%, rgba(212,175,55,0.07) 0%, transparent 55%)' }}
       />
-      
-      {/* Breathing Element */}
-      <motion.div 
-        className="absolute top-2/3 right-1/3 w-28 h-28 bg-gold/5 rounded-full blur-2xl"
-        animate={{ 
-          scale: [1, 1.4, 1],
-          opacity: [0.3, 0.7, 0.3]
-        }}
-        transition={{ 
-          duration: 6, 
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
+        {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          transition={{ duration: 0.55 }}
+          className="text-center mb-10 md:mb-14"
         >
-          <h2 
-            className="text-4xl md:text-5xl lg:text-6xl mb-2 tracking-tight"
-            style={{ fontFamily: 'var(--font-cormorant)' }}
+          <p
+            className="text-xs font-bold uppercase tracking-widest mb-3"
+            style={{ color: 'var(--gold)', fontFamily: 'var(--font-inter)' }}
           >
-            Why Choose <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant)' }}>Us</span>
+            Our Advantage
+          </p>
+          <h2
+            id="why-heading"
+            className="section-title text-3xl md:text-4xl lg:text-5xl mb-3"
+          >
+            Why Choose <span className="text-gold">Us</span>
           </h2>
-          <p 
-            className="text-black dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
-            style={{ fontFamily: 'var(--font-inter)', fontSize: '16px' }}
+          <p
+            className="section-desc max-w-2xl mx-auto leading-relaxed"
+            style={{ color: 'var(--muted)', fontFamily: 'var(--font-inter)', fontSize: '1rem' }}
           >
-            What makes us the right partner for your digital success
+            What makes us the right digital partner for your business success
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {reasons.map((reason, index) => (
             <motion.div
               key={reason.title}
-              initial={{ opacity: 0, y: 30, scale: 0.9, rotateY: -15 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1, rotateY: 0 } : {}}
-              transition={{ 
-                duration: 0.8, 
-                delay: 0.2 + index * 0.1,
-                type: "spring",
-                stiffness: 120
-              }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -8,
-                rotateY: 2,
-                transition: { duration: 0.3 }
-              }}
-              className="bg-white/95 dark:bg-charcoal/80 backdrop-blur-xl border-2 border-gold/40 dark:border-white/10 p-6 hover:bg-white/98 dark:hover:bg-charcoal/90 hover:border-gold/60 hover:shadow-xl transition-all duration-300 group cursor-pointer"
-              style={{ borderRadius: '8px', perspective: '1000px' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.45, delay: 0.08 + index * 0.07 }}
+              whileHover={{ y: -4 }}
+              className="card group p-6 cursor-default"
             >
               <div className="flex items-start gap-4">
-                <motion.div 
-                  className="p-3 bg-gradient-to-br from-gold/30 to-gold/15 group-hover:from-gold/40 group-hover:to-gold/25 transition-colors flex-shrink-0" 
-                  style={{ borderRadius: '4px' }}
-                  whileHover={{ rotate: 10, scale: 1.15 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <reason.icon className="text-gold" size={22} />
-                </motion.div>
-                <div className="flex-1">
-                  <h3 
-                    className="font-bold mb-2 text-black dark:text-gold group-hover:text-gold transition-colors"
-                    style={{ fontFamily: 'var(--font-cormorant)', fontSize: '17px' }}
+                <div className="icon-badge shrink-0" aria-hidden="true">
+                  <reason.icon style={{ color: 'var(--gold)' }} size={20} />
+                </div>
+                <div>
+                  <h3
+                    className="font-bold mb-1.5 group-hover:text-gold transition-colors"
+                    style={{ fontFamily: 'var(--font-manrope)', fontSize: '1rem', color: 'var(--heading)' }}
                   >
                     {reason.title}
                   </h3>
-                  <p 
-                    className="text-black dark:text-gray-400 leading-relaxed"
-                    style={{ fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                  <p
+                    className="leading-relaxed"
+                    style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--muted)' }}
                   >
                     {reason.description}
                   </p>

@@ -1,14 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { FiPhone, FiSend } from 'react-icons/fi';
+import { FiPhone, FiSend, FiMapPin } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 export default function Contact({ showHeading = true }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -18,6 +18,8 @@ export default function Contact({ showHeading = true }) {
     message: '',
   });
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
 
   const services = [
@@ -47,9 +49,6 @@ export default function Contact({ showHeading = true }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -63,9 +62,7 @@ export default function Contact({ showHeading = true }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       if (!res.ok) throw new Error('Failed to send');
-
       setShowSuccess(true);
       setFormData({ name: '', phone: '', email: '', businessName: '', service: '', message: '' });
       setTimeout(() => setShowSuccess(false), 6000);
@@ -78,204 +75,219 @@ export default function Contact({ showHeading = true }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
+  const inputClass = (field) =>
+    `w-full px-4 py-3 rounded-md text-sm border-2 bg-white dark:bg-charcoal transition-colors focus:outline-none ${
+      errors[field]
+        ? 'border-red-400'
+        : 'border-[rgba(107,91,149,0.22)] focus:border-gold'
+    }`;
+
   return (
-    <section id="contact" ref={ref} className="py-16 md:py-24 px-3 sm:px-4 bg-cream dark:bg-charcoal/50 relative overflow-hidden">
-      {/* Background Elements with Animation */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none"
+    <section
+      id="contact"
+      ref={ref}
+      className="bg-section-alt section-pad relative overflow-hidden"
+      aria-labelledby="contact-heading"
+    >
+      {/* Decorative blobs */}
+      <div
+        className="absolute top-0 right-0 w-80 h-80 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: 'radial-gradient(circle at 90% 10%, rgba(212,175,55,0.07) 0%, transparent 55%)' }}
       />
-      
-      {/* Animated Flowing Orbs */}
-      <motion.div 
-        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
-        animate={{ 
-          x: [0, 50, 0],
-          y: [0, -40, 0],
-          scale: [1, 1.2, 1]
-        }}
-        transition={{ 
-          duration: 8, 
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
-        animate={{ 
-          x: [0, -60, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.15, 1]
-        }}
-        transition={{ 
-          duration: 10, 
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1.5
-        }}
-      />
-      
-      {/* Center Pulsing Element */}
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gold/5 rounded-full blur-2xl"
-        animate={{ 
-          scale: [1, 1.6, 1],
-          opacity: [0.2, 0.5, 0.2]
-        }}
-        transition={{ 
-          duration: 7, 
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
+      <div
+        className="absolute bottom-0 left-0 w-72 h-72 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: 'radial-gradient(circle at 10% 90%, rgba(107,91,149,0.06) 0%, transparent 55%)' }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10 w-full">
-
-        {/* Section Header — h2 shown on home page, hidden on /contact which has its own h1 */}
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section header */}
         {showHeading && (
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            transition={{ duration: 0.55 }}
+            className="text-center mb-10 md:mb-14"
           >
-            <h2
-              className="text-4xl md:text-5xl lg:text-6xl mb-2 tracking-tight"
-              style={{ fontFamily: 'var(--font-cormorant)' }}
+            <p
+              className="text-xs font-bold uppercase tracking-widest mb-3"
+              style={{ color: 'var(--gold)', fontFamily: 'var(--font-inter)' }}
             >
-              Get In <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant)' }}>Touch</span>
+              Let&apos;s Talk
+            </p>
+            <h2
+              id="contact-heading"
+              className="section-title text-3xl md:text-4xl lg:text-5xl mb-3"
+            >
+              Get In <span className="text-gold">Touch</span>
             </h2>
             <p
-              className="text-black dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
-              style={{ fontFamily: 'var(--font-inter)', fontSize: '16px' }}
+              className="section-desc max-w-2xl mx-auto leading-relaxed"
+              style={{ color: 'var(--muted)', fontFamily: 'var(--font-inter)', fontSize: '1rem' }}
             >
-              Let&apos;s grow together - tell us about your business and we&apos;ll craft the right digital strategy for you
+              Tell us about your business and we&apos;ll craft the right digital strategy for you
             </p>
           </motion.div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 w-full">
-
-          {/* Contact Info + Map */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          {/* Left — contact info + map */}
           <motion.div
-            initial={{ opacity: 0, x: -50, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, type: 'spring', stiffness: 100 }}
-            className="flex flex-col space-y-3 sm:space-y-4 lg:space-y-6 h-full w-full"
+            initial={{ opacity: 0, x: -28 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, type: 'spring', stiffness: 100 }}
+            className="flex flex-col gap-5"
           >
-            {/* Contact Information Card */}
-            <motion.div
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-white/95 dark:bg-charcoal/80 backdrop-blur-xl border-2 border-gold/40 dark:border-white/10 p-3 sm:p-4 lg:p-8 shadow-2xl hover:shadow-3xl hover:border-gold/60 transition-all duration-500 w-full"
-              style={{ borderRadius: '8px' }}
-            >
+            {/* Contact info card */}
+            <div className="card p-6 md:p-7">
               <h3
-                className="font-bold mb-3 sm:mb-4 lg:mb-6 text-black dark:text-gold"
-                style={{ fontFamily: 'var(--font-cormorant)', fontSize: '16px' }}
+                className="font-bold mb-5"
+                style={{ fontFamily: 'var(--font-manrope)', fontSize: '1.0625rem', color: 'var(--heading)' }}
               >
                 Contact Information
               </h3>
 
-              <div className="space-y-3 sm:space-y-4 lg:space-y-6">
-                <motion.a
+              <div className="space-y-5">
+                {/* Phone */}
+                <a
                   href="tel:+916304484048"
-                  className="flex items-center gap-2 sm:gap-3 lg:gap-4 group hover:text-gold transition-colors"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="flex items-center gap-4 group"
+                  aria-label="Call +91 6304484048"
                 >
-                  <div className="p-1.5 sm:p-2 lg:p-3 bg-gradient-to-br from-gold/30 to-gold/15 group-hover:from-gold/40 group-hover:to-gold/25 transition-colors" style={{ borderRadius: '4px' }}>
-                    <FiPhone className="text-gold" size={16} />
+                  <div className="icon-badge shrink-0" style={{ width: 40, height: 40 }} aria-hidden="true">
+                    <FiPhone style={{ color: 'var(--gold)' }} size={17} />
                   </div>
                   <div>
-                    <div className="font-semibold text-black dark:text-white" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '14px' }}>Phone</div>
-                    <div className="text-black dark:text-gray-400" style={{ fontFamily: 'var(--font-inter)', fontSize: '12px' }}>+91 6304484048</div>
+                    <p className="text-xs font-semibold uppercase tracking-wide mb-0.5" style={{ color: 'var(--muted)', fontFamily: 'var(--font-inter)' }}>Phone</p>
+                    <p className="font-semibold text-sm group-hover:text-gold transition-colors" style={{ fontFamily: 'var(--font-inter)', color: 'var(--body)' }}>+91 6304484048</p>
                   </div>
-                </motion.a>
+                </a>
 
-                <motion.a
-                  href="https://wa.me/916304484048?text=Hi,%20what%20can%20I%20help%20you%20with?"
+                {/* WhatsApp */}
+                <a
+                  href="https://wa.me/919010996525?text=Hi,%20I%20would%20like%20to%20know%20more%20about%20your%20services"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 sm:gap-3 lg:gap-4 group hover:text-gold transition-colors"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="flex items-center gap-4 group"
+                  aria-label="Chat on WhatsApp"
                 >
-                  <div className="p-1.5 sm:p-2 lg:p-3 bg-gradient-to-br from-gold/30 to-gold/15 group-hover:from-gold/40 group-hover:to-gold/25 transition-colors" style={{ borderRadius: '4px' }}>
-                    <FaWhatsapp className="text-gold" size={16} />
+                  <div className="icon-badge shrink-0" style={{ width: 40, height: 40 }} aria-hidden="true">
+                    <FaWhatsapp style={{ color: 'var(--gold)' }} size={17} />
                   </div>
                   <div>
-                    <div className="font-semibold text-black dark:text-white" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '14px' }}>WhatsApp</div>
-                    <div className="text-black dark:text-gray-400" style={{ fontFamily: 'var(--font-inter)', fontSize: '12px' }}>Chat with us instantly</div>
+                    <p className="text-xs font-semibold uppercase tracking-wide mb-0.5" style={{ color: 'var(--muted)', fontFamily: 'var(--font-inter)' }}>WhatsApp</p>
+                    <p className="font-semibold text-sm group-hover:text-gold transition-colors" style={{ fontFamily: 'var(--font-inter)', color: 'var(--body)' }}>Chat with us instantly</p>
                   </div>
-                </motion.a>
+                </a>
 
-                <div className="pt-2 sm:pt-3 lg:pt-4 border-t border-gold/20">
-                  <div className="font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '14px' }}>Service Areas</div>
-                  <div className="text-black dark:text-gray-400" style={{ fontFamily: 'var(--font-inter)', fontSize: '12px' }}>Serving businesses across India</div>
-                  <div className="text-black dark:text-gray-400 mt-1" style={{ fontFamily: 'var(--font-inter)', fontSize: '12px' }}>Phone: +91 6304484048</div>
+                {/* Location */}
+                <div className="flex items-start gap-4">
+                  <div className="icon-badge shrink-0" style={{ width: 40, height: 40 }} aria-hidden="true">
+                    <FiMapPin style={{ color: 'var(--gold)' }} size={17} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide mb-0.5" style={{ color: 'var(--muted)', fontFamily: 'var(--font-inter)' }}>Location</p>
+                    <p className="font-semibold text-sm" style={{ fontFamily: 'var(--font-inter)', color: 'var(--body)' }}>
+                      Mogaltur, West Godavari<br />
+                      <span style={{ color: 'var(--muted)', fontWeight: 400 }}>Andhra Pradesh, India</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  className="pt-4"
+                  style={{ borderTop: '1px solid rgba(107,91,149,0.1)' }}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--muted)', fontFamily: 'var(--font-inter)' }}>Service Areas</p>
+                  <p className="text-sm" style={{ fontFamily: 'var(--font-inter)', color: 'var(--body)' }}>
+                    Mogaltur · West Godavari · Andhra Pradesh · Telangana
+                  </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Map - desktop only */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6, type: 'spring', stiffness: 100 }}
-              whileHover={{ scale: 1.01 }}
-              className="hidden lg:flex flex-1 overflow-hidden shadow-2xl border-2 border-gold/40 dark:border-white/10 hover:border-gold/60 transition-all duration-500"
-              style={{ borderRadius: '8px' }}
+            {/* Embedded map — desktop only */}
+            <div
+              className="hidden lg:block flex-1 overflow-hidden rounded-lg"
+              style={{
+                border: '1px solid rgba(212,175,55,0.28)',
+                minHeight: 220,
+                boxShadow: 'var(--shadow-card)',
+              }}
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15261.5!2d81.5833!3d16.4167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37b0c1234abcde%3A0x0!2sMogalthuru%2C%20West%20Godavari%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15261.5!2d81.5833!3d16.4167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37b0c1234abcde%3A0x0!2sMogaltur%2C%20West%20Godavari%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ border: 0, display: 'block', minHeight: 220 }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Sai Digital Services Location"
+                title="Sai Digital Services – Mogaltur, West Godavari location"
               />
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Right — contact form */}
           <motion.div
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.4, type: 'spring', stiffness: 100 }}
-            whileHover={{ scale: 1.02, y: -5 }}
-            className="h-full w-full"
+            initial={{ opacity: 0, x: 28 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2, type: 'spring', stiffness: 100 }}
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-white/95 dark:bg-charcoal/80 backdrop-blur-xl border-2 border-gold/40 dark:border-white/10 p-3 sm:p-4 lg:p-8 shadow-2xl hover:shadow-3xl hover:border-gold/60 transition-all duration-500 space-y-3 lg:space-y-4 h-full w-full"
-              style={{ borderRadius: '8px' }}
+              noValidate
+              className="card p-6 md:p-7 space-y-4"
             >
+              {/* Name */}
               <div>
-                <label htmlFor="name" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Name *</label>
+                <label
+                  htmlFor="name"
+                  className="block text-xs font-semibold uppercase tracking-wide mb-1.5"
+                  style={{ fontFamily: 'var(--font-inter)', color: 'var(--muted)' }}
+                >
+                  Name <span className="text-red-500" aria-hidden="true">*</span>
+                </label>
                 <input
-                  type="text" id="name" name="name" value={formData.name} onChange={handleChange}
-                  aria-label="Your full name"
-                  aria-required="true"
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 ${errors.name ? 'border-red-500' : 'border-gold/30 dark:border-white/20'} focus:border-gold focus:outline-none transition-colors`}
-                  style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={inputClass('name')}
                   placeholder="Your name"
+                  aria-required="true"
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                 />
-                {errors.name && <p className="text-red-500 text-xs mt-1" role="alert">{errors.name}</p>}
+                {errors.name && (
+                  <p id="name-error" className="text-red-500 text-xs mt-1" role="alert">{errors.name}</p>
+                )}
               </div>
 
+              {/* Phone */}
               <div>
-                <label htmlFor="phone" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Phone *</label>
-                <div className="flex gap-0 w-full">
+                <label
+                  htmlFor="phone"
+                  className="block text-xs font-semibold uppercase tracking-wide mb-1.5"
+                  style={{ fontFamily: 'var(--font-inter)', color: 'var(--muted)' }}
+                >
+                  Phone <span className="text-red-500" aria-hidden="true">*</span>
+                </label>
+                <div className="flex gap-0">
                   <span
+                    className="inline-flex items-center px-3 py-3 text-sm font-semibold rounded-l-md border-2 border-r-0"
+                    style={{
+                      background: 'rgba(212,175,55,0.1)',
+                      borderColor: errors.phone ? '#f87171' : 'rgba(107,91,149,0.22)',
+                      color: 'var(--body)',
+                      fontFamily: 'var(--font-inter)',
+                    }}
                     aria-label="India country code +91"
-                    className="inline-flex items-center px-3 py-2 sm:py-3 bg-gold/20 dark:bg-gold/10 border-2 border-r-0 border-gold/30 dark:border-white/20 text-black dark:text-white font-semibold flex-shrink-0"
-                    style={{ borderRadius: '4px 0 0 4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
                   >
                     🇮🇳 +91
                   </span>
@@ -285,110 +297,169 @@ export default function Contact({ showHeading = true }) {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    aria-label="Phone number (10-digit Indian mobile number)"
-                    className={`flex-1 min-w-0 px-2 sm:px-3 lg:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 ${errors.phone ? 'border-red-500' : 'border-gold/30 dark:border-white/20'} focus:border-gold focus:outline-none transition-colors`}
-                    style={{ borderRadius: '0 4px 4px 0', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                    className="flex-1 min-w-0 px-3 py-3 text-sm rounded-r-md border-2 bg-white dark:bg-charcoal focus:outline-none transition-colors"
+                    style={{
+                      borderColor: errors.phone ? '#f87171' : 'rgba(107,91,149,0.22)',
+                      color: 'var(--body)',
+                      fontFamily: 'var(--font-inter)',
+                    }}
                     placeholder="10-digit mobile number"
                     maxLength={10}
                     inputMode="numeric"
+                    aria-required="true"
+                    aria-describedby={errors.phone ? 'phone-error' : undefined}
                   />
                 </div>
-                {errors.phone && <p className="text-red-500 text-xs mt-1" role="alert">{errors.phone}</p>}
+                {errors.phone && (
+                  <p id="phone-error" className="text-red-500 text-xs mt-1" role="alert">{errors.phone}</p>
+                )}
               </div>
 
+              {/* Email */}
               <div>
-                <label htmlFor="email" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Email *</label>
+                <label
+                  htmlFor="email"
+                  className="block text-xs font-semibold uppercase tracking-wide mb-1.5"
+                  style={{ fontFamily: 'var(--font-inter)', color: 'var(--muted)' }}
+                >
+                  Email <span className="text-red-500" aria-hidden="true">*</span>
+                </label>
                 <input
-                  type="email" id="email" name="email" value={formData.email} onChange={handleChange}
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 ${errors.email ? 'border-red-500' : 'border-gold/30 dark:border-white/20'} focus:border-gold focus:outline-none transition-colors`}
-                  style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={inputClass('email')}
                   placeholder="your@email.com"
+                  aria-required="true"
+                  aria-describedby={errors.email ? 'email-error' : undefined}
                 />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                {errors.email && (
+                  <p id="email-error" className="text-red-500 text-xs mt-1" role="alert">{errors.email}</p>
+                )}
               </div>
 
+              {/* Business name */}
               <div>
-                <label htmlFor="businessName" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Business Name</label>
+                <label
+                  htmlFor="businessName"
+                  className="block text-xs font-semibold uppercase tracking-wide mb-1.5"
+                  style={{ fontFamily: 'var(--font-inter)', color: 'var(--muted)' }}
+                >
+                  Business Name
+                </label>
                 <input
-                  type="text" id="businessName" name="businessName" value={formData.businessName} onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 border-gold/30 dark:border-white/20 focus:border-gold focus:outline-none transition-colors"
-                  style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                  type="text"
+                  id="businessName"
+                  name="businessName"
+                  value={formData.businessName}
+                  onChange={handleChange}
+                  className={inputClass('')}
                   placeholder="Your business name (optional)"
                 />
               </div>
 
+              {/* Service */}
               <div>
-                <label htmlFor="service" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Service Needed *</label>
-                <select
-                  id="service" name="service" value={formData.service} onChange={handleChange}
-                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 ${errors.service ? 'border-red-500' : 'border-gold/30 dark:border-white/20'} focus:border-gold focus:outline-none transition-colors`}
-                  style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                <label
+                  htmlFor="service"
+                  className="block text-xs font-semibold uppercase tracking-wide mb-1.5"
+                  style={{ fontFamily: 'var(--font-inter)', color: 'var(--muted)' }}
                 >
-                  <option value="" className="bg-white dark:bg-charcoal text-black dark:text-white">Select a service</option>
-                  {services.map(service => (
-                    <option key={service} value={service} className="bg-white dark:bg-charcoal text-black dark:text-white">{service}</option>
+                  Service Needed <span className="text-red-500" aria-hidden="true">*</span>
+                </label>
+                <select
+                  id="service"
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className={inputClass('service')}
+                  aria-required="true"
+                  aria-describedby={errors.service ? 'service-error' : undefined}
+                >
+                  <option value="">Select a service</option>
+                  {services.map((s) => (
+                    <option key={s} value={s}>{s}</option>
                   ))}
                 </select>
-                {errors.service && <p className="text-red-500 text-xs mt-1">{errors.service}</p>}
+                {errors.service && (
+                  <p id="service-error" className="text-red-500 text-xs mt-1" role="alert">{errors.service}</p>
+                )}
               </div>
 
+              {/* Message */}
               <div>
-                <label htmlFor="message" className="block font-semibold mb-1 sm:mb-2 text-black dark:text-gold" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '13px' }}>Message</label>
+                <label
+                  htmlFor="message"
+                  className="block text-xs font-semibold uppercase tracking-wide mb-1.5"
+                  style={{ fontFamily: 'var(--font-inter)', color: 'var(--muted)' }}
+                >
+                  Message
+                </label>
                 <textarea
-                  id="message" name="message" value={formData.message} onChange={handleChange} rows="3"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-charcoal text-black dark:text-white border-2 border-gold/30 dark:border-white/20 focus:border-gold focus:outline-none transition-colors resize-none"
-                  style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={3}
+                  className={inputClass('')}
                   placeholder="Tell us about your project (optional)"
+                  style={{ resize: 'none' }}
                 />
               </div>
 
+              {/* Submit */}
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileHover={{ scale: isSubmitting ? 1 : 1.01 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gold text-black font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-gold/50 flex items-center justify-center gap-2 sm:gap-3 disabled:opacity-60 disabled:cursor-not-allowed"
-                style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '14px' }}
+                className="btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
-                    <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                    <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
                     </svg>
-                    <span>Sending...</span>
+                    <span>Sending…</span>
                   </>
                 ) : (
                   <>
                     <span>Let&apos;s Grow Together</span>
-                    <FiSend size={14} />
+                    <FiSend size={14} aria-hidden="true" />
                   </>
                 )}
               </motion.button>
 
+              {/* Error message */}
               {submitError && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-3 sm:p-4 bg-red-500/20 border-2 border-red-500/50 text-red-600 dark:text-red-400 text-center"
-                  style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                  role="alert"
+                  className="p-3 text-sm text-red-600 rounded-md"
+                  style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)', fontFamily: 'var(--font-inter)' }}
                 >
                   {submitError}
                 </motion.div>
               )}
 
+              {/* Success message */}
               {showSuccess && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-3 sm:p-4 bg-green-500/20 border-2 border-green-500/50 text-green-600 dark:text-green-400 text-center"
-                  style={{ borderRadius: '4px', fontFamily: 'var(--font-inter)', fontSize: '13px' }}
+                  role="status"
+                  aria-live="polite"
+                  className="p-3 text-sm text-green-700 rounded-md"
+                  style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.3)', fontFamily: 'var(--font-inter)' }}
                 >
-                  Thank you! We&apos;ll contact you soon.
+                  Thank you! We&apos;ll contact you within 24 hours.
                 </motion.div>
               )}
             </form>
           </motion.div>
-
         </div>
       </div>
     </section>

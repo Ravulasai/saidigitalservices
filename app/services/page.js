@@ -110,9 +110,9 @@ export default function ServicesPage() {
           >
             <h1 
               className="text-4xl md:text-5xl lg:text-6xl mb-4 tracking-tight"
-              style={{ fontFamily: 'var(--font-cormorant)' }}
+              style={{ fontFamily: 'var(--font-manrope)' }}
             >
-              Our <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant)' }}>Services</span>
+              Our <span className="text-gold italic" style={{ fontFamily: 'var(--font-manrope)' }}>Services</span>
             </h1>
             <p 
               className="text-black dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
@@ -149,7 +149,7 @@ export default function ServicesPage() {
                   <div>
                     <motion.h2 
                       className="text-xl lg:text-2xl font-bold text-black dark:text-gold"
-                      style={{ fontFamily: 'var(--font-cormorant)' }}
+                      style={{ fontFamily: 'var(--font-manrope)' }}
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ delay: index * 0.15 + 0.2 }}
@@ -203,7 +203,7 @@ export default function ServicesPage() {
                 <div className="mb-6">
                   <h4 
                     className="font-semibold mb-3 text-black dark:text-gold"
-                    style={{ fontFamily: 'var(--font-cormorant)', fontSize: '16px' }}
+                    style={{ fontFamily: 'var(--font-manrope)', fontSize: '16px' }}
                   >
                     Technologies
                   </h4>
@@ -257,7 +257,7 @@ export default function ServicesPage() {
           >
             <h2 
               className="text-3xl lg:text-4xl font-bold mb-4 text-black dark:text-gold"
-              style={{ fontFamily: 'var(--font-cormorant)' }}
+              style={{ fontFamily: 'var(--font-manrope)' }}
             >
               Ready to Grow Together?
             </h2>

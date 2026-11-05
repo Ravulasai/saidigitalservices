@@ -1,7 +1,17 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Defer Resend initialisation to avoid build-time errors when the API key
+// is not yet set in the environment.
+let resend;
+function getResend() {
+  if (!resend) {
+    const key = process.env.RESEND_API_KEY;
+    if (!key) throw new Error('RESEND_API_KEY environment variable is not set.');
+    resend = new Resend(key);
+  }
+  return resend;
+}
 
 /* ─── Customer thank-you email ─── */
 function customerEmailHtml({ name, service, message }) {
@@ -100,7 +110,7 @@ function customerEmailHtml({ name, service, message }) {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
-                    <a href="https://wa.me/916304484048" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#D4AF37 0%,#FFD700 50%,#B8860B 100%);color:#0A0A0A;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;font-family:'Arial',sans-serif;">
+                    <a href="https://wa.me/919010996525" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#D4AF37 0%,#FFD700 50%,#B8860B 100%);color:#0A0A0A;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;font-family:'Arial',sans-serif;">
                       Chat on WhatsApp
                     </a>
                   </td>
@@ -249,15 +259,17 @@ export async function POST(request) {
     const { name, phone, email, businessName, service, message } = body;
     const fullPhone = `+91 ${phone}`;
 
+    const client = getResend();
+
     // Send both emails in parallel
     const [customerResult, adminResult] = await Promise.all([
-      resend.emails.send({
+      client.emails.send({
         from: `Sai Digital Services <${process.env.FROM_EMAIL}>`,
         to: [email],
         subject: `Thank you for reaching out, ${name} - Sai Digital Services`,
         html: customerEmailHtml({ name, service, message }),
       }),
-      resend.emails.send({
+      client.emails.send({
         from: `Sai Digital Services <${process.env.FROM_EMAIL}>`,
         to: [process.env.ADMIN_EMAIL],
         subject: `New Lead: ${name} - ${service || 'General Enquiry'}`,

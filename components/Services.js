@@ -4,142 +4,121 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { FiCode, FiTrendingUp, FiShare2, FiTarget, FiZap, FiTool } from 'react-icons/fi';
 
+const services = [
+  {
+    icon: FiCode,
+    title: 'Website Development',
+    description: 'Responsive business websites, portfolio sites, landing pages, and e-commerce solutions built with modern technologies.',
+  },
+  {
+    icon: FiTrendingUp,
+    title: 'SEO Optimization',
+    description: 'On-page SEO, speed optimization, rankings improvement, and local SEO to boost your online visibility.',
+  },
+  {
+    icon: FiShare2,
+    title: 'Social Media Management',
+    description: 'Instagram and Facebook growth strategies with engaging content that connects with your audience.',
+  },
+  {
+    icon: FiTarget,
+    title: 'Digital Marketing',
+    description: 'Lead generation campaigns and conversion optimization to grow your business online.',
+  },
+  {
+    icon: FiZap,
+    title: 'Branding Strategy',
+    description: 'Creative ideas and strategies to grow your brand and stand out in the digital marketplace.',
+  },
+  {
+    icon: FiTool,
+    title: 'Website Maintenance',
+    description: 'Regular updates, bug fixes, security patches, and ongoing support for your website.',
+  },
+];
+
 export default function Services() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const services = [
-    {
-      icon: FiCode,
-      title: 'Website Development',
-      description: 'Responsive business websites, portfolio sites, landing pages, ecommerce solutions built with modern technologies.',
-    },
-    {
-      icon: FiTrendingUp,
-      title: 'SEO Optimization',
-      description: 'On-page SEO, speed optimization, rankings improvement, and local SEO to boost your online visibility.',
-    },
-    {
-      icon: FiShare2,
-      title: 'Social Media Management',
-      description: 'Instagram and Facebook growth strategies with engaging content that connects with your audience.',
-    },
-    {
-      icon: FiTarget,
-      title: 'Digital Marketing',
-      description: 'Lead generation campaigns and conversion optimization to grow your business online.',
-    },
-    {
-      icon: FiZap,
-      title: 'Branding Strategy',
-      description: 'Creative ideas and strategies to grow your brand and stand out in the digital marketplace.',
-    },
-    {
-      icon: FiTool,
-      title: 'Website Maintenance',
-      description: 'Regular updates, bug fixes, security patches, and ongoing support for your website.',
-    },
-  ];
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="services" ref={ref} className="py-16 md:py-24 px-4 bg-white dark:bg-charcoal/50 relative overflow-hidden">
-      {/* Background Elements with Animation */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple/5 via-transparent to-gold/5 pointer-events-none" />
-      
-      {/* Animated Flowing Waves */}
-      <motion.div 
-        className="absolute top-20 right-10 w-32 h-32 bg-gold/10 rounded-full blur-3xl"
-        animate={{ 
-          y: [0, -40, 0],
-          x: [0, 20, 0],
-          opacity: [0.5, 1, 0.5]
-        }}
-        transition={{ 
-          duration: 7, 
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+    <section
+      id="services"
+      ref={ref}
+      className="bg-section-alt section-pad relative overflow-hidden"
+      aria-labelledby="services-heading"
+    >
+      {/* Subtle decorative blobs */}
+      <div
+        className="absolute top-0 right-0 w-72 h-72 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: 'radial-gradient(circle at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 60%)' }}
       />
-      <motion.div 
-        className="absolute bottom-20 left-10 w-40 h-40 bg-purple/10 rounded-full blur-3xl"
-        animate={{ 
-          y: [0, 30, 0],
-          x: [0, -30, 0],
-          opacity: [0.5, 0.8, 0.5]
-        }}
-        transition={{ 
-          duration: 9, 
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5
-        }}
+      <div
+        className="absolute bottom-0 left-0 w-64 h-64 pointer-events-none"
+        aria-hidden="true"
+        style={{ background: 'radial-gradient(circle at 20% 80%, rgba(107,91,149,0.07) 0%, transparent 60%)' }}
       />
-      
-      {/* Pulsing Center Orb */}
-      <motion.div 
-        className="absolute top-1/3 right-1/4 w-32 h-32 bg-gold/5 rounded-full blur-2xl"
-        animate={{ 
-          scale: [1, 1.5, 1],
-          opacity: [0.2, 0.6, 0.2]
-        }}
-        transition={{ 
-          duration: 5, 
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1.5
-        }}
-      />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
+        {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          transition={{ duration: 0.55 }}
+          className="text-center mb-10 md:mb-14"
         >
-          <h2 
-            className="text-4xl md:text-5xl lg:text-6xl mb-2 tracking-tight"
-            style={{ fontFamily: 'var(--font-cormorant)' }}
+          <p
+            className="text-xs font-bold uppercase tracking-widest mb-3"
+            style={{ color: 'var(--gold)', fontFamily: 'var(--font-inter)' }}
           >
-            Our <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant)' }}>Services</span>
+            What We Do
+          </p>
+          <h2
+            id="services-heading"
+            className="section-title text-3xl md:text-4xl lg:text-5xl mb-3"
+          >
+            Our <span className="text-gold">Services</span>
           </h2>
-          <p 
-            className="text-black dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
-            style={{ fontFamily: 'var(--font-inter)', fontSize: '16px' }}
+          <p
+            className="section-desc max-w-2xl mx-auto leading-relaxed"
+            style={{ color: 'var(--muted)', fontFamily: 'var(--font-inter)', fontSize: '1rem' }}
           >
-            Comprehensive digital solutions to help your business thrive online
+            Comprehensive digital solutions to help your business thrive online — from web development to marketing
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
-              whileHover={{ scale: 1.03, y: -6 }}
-              className="bg-white/95 dark:bg-charcoal/80 backdrop-blur-xl border-2 border-gold/40 dark:border-white/10 p-6 hover:bg-white/98 dark:hover:bg-charcoal/90 hover:border-gold/60 hover:shadow-xl transition-all duration-300 group cursor-pointer"
-              style={{ borderRadius: '8px' }}
+              transition={{ duration: 0.45, delay: 0.08 + index * 0.07 }}
+              whileHover={{ y: -4 }}
+              className="card group p-6 cursor-default"
             >
-              <motion.div 
-                className="mb-4 p-3 bg-gradient-to-br from-gold/30 to-gold/15 group-hover:from-gold/40 group-hover:to-gold/25 transition-colors w-fit" 
-                style={{ borderRadius: '4px' }}
-                whileHover={{ rotate: 10, scale: 1.15 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <service.icon className="text-gold" size={24} />
-              </motion.div>
-              <h3 
-                className="font-bold mb-2 text-black dark:text-gold group-hover:text-gold transition-colors"
-                style={{ fontFamily: 'var(--font-cormorant)', fontSize: '18px' }}
+              {/* Icon */}
+              <div className="icon-badge mb-4" aria-hidden="true">
+                <service.icon style={{ color: 'var(--gold)' }} size={22} />
+              </div>
+
+              {/* Title */}
+              <h3
+                className="font-bold mb-2 group-hover:text-gold transition-colors"
+                style={{
+                  fontFamily: 'var(--font-manrope)',
+                  fontSize: '1.0625rem',
+                  color: 'var(--heading)',
+                }}
               >
                 {service.title}
               </h3>
-              <p 
-                className="text-black dark:text-gray-400 leading-relaxed"
-                style={{ fontFamily: 'var(--font-inter)', fontSize: '14px' }}
+
+              {/* Description */}
+              <p
+                className="leading-relaxed"
+                style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: 'var(--muted)' }}
               >
                 {service.description}
               </p>

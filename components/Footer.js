@@ -1,238 +1,356 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
-import { FiPhone, FiMail } from 'react-icons/fi';
+import { FiPhone, FiMail, FiMapPin, FiArrowUpRight } from 'react-icons/fi';
+
+const links = [
+  { label: 'Home',     href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'About',    href: '/about' },
+  { label: 'FAQ',      href: '/faq' },
+  { label: 'Contact',  href: '/contact' },
+];
+
+const socials = [
+  {
+    icon: FiPhone,
+    href: 'tel:+916304484048',
+    label: 'Call us',
+    color: '#34D399',
+    bg: 'rgba(52,211,153,0.12)',
+  },
+  {
+    icon: FaWhatsapp,
+    href: 'https://wa.me/919010996525',
+    label: 'WhatsApp',
+    color: '#25D366',
+    bg: 'rgba(37,211,102,0.12)',
+  },
+  {
+    icon: FaInstagram,
+    href: 'https://www.instagram.com/sai_digital_services_?igsh=aGR0NHowcTR0cmk0',
+    label: 'Instagram',
+    external: true,
+    color: '#F472B6',
+    bg: 'rgba(244,114,182,0.12)',
+  },
+  {
+    icon: FiMail,
+    href: 'mailto:sairavula1919@gmail.com',
+    label: 'Email us',
+    color: '#60A5FA',
+    bg: 'rgba(96,165,250,0.12)',
+  },
+];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-white dark:bg-[#0f0d0a] border-t border-gold/30 relative overflow-hidden">
-      {/* Background Elements with Animation */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold/5 to-transparent pointer-events-none" />
-      <motion.div 
-        className="absolute top-0 left-1/3 w-48 h-48 bg-gold/8 rounded-full blur-3xl"
-        animate={{ 
-          x: [0, 40, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.2, 1]
-        }}
-        transition={{ 
-          duration: 8, 
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div 
-        className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple/8 rounded-full blur-3xl"
-        animate={{ 
-          x: [0, -60, 0],
-          y: [0, 40, 0],
-          scale: [1, 1.15, 1]
-        }}
-        transition={{ 
-          duration: 10, 
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
+    <footer
+      role="contentinfo"
+      style={{
+        background: 'linear-gradient(170deg, #0D0D16 0%, #111120 60%, #0A0A12 100%)',
+        borderTop: '1px solid rgba(212,175,55,0.18)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Decorative glow blobs */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '-60px',
+          left: '10%',
+          width: '320px',
+          height: '320px',
+          background: 'radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%)',
+          pointerEvents: 'none',
         }}
       />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
-        
-        {/* Main Footer Content */}
-        <div className="py-8 md:py-12 px-4 md:px-8">
-          
-          {/* Main Grid - 3 Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
-            
-            {/* Left Column - Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center md:items-start text-center md:text-left"
-            >
-              <div className="mb-8">
-                <div className="inline-flex items-center gap-3 mb-4 p-4 bg-gold/10 rounded-lg border border-gold/30">
-                  <FiMail className="text-gold" size={24} />
-                  <h3 
-                    className="text-gold font-bold uppercase tracking-widest text-sm"
-                    style={{ fontFamily: 'var(--font-inter)' }}
-                  >
-                    Email
-                  </h3>
-                </div>
-                <motion.a
-                  href="mailto:sairavula1919@gmail.com"
-                  className="text-gray-800 dark:text-gray-300 hover:text-gold transition-colors text-sm block font-semibold"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  sairavula1919@gmail.com
-                </motion.a>
-              </div>
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: '-40px',
+          right: '5%',
+          width: '280px',
+          height: '280px',
+          background: 'radial-gradient(circle, rgba(107,91,149,0.1) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
 
-              <div className="mb-8">
-                <p 
-                  className="text-gray-700 dark:text-gray-500 text-sm mb-2 font-bold uppercase tracking-wide"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  Location
-                </p>
-                <p 
-                  className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-medium"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  Andhra Pradesh, India
-                </p>
-              </div>
-            </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
-            {/* Center Column - Brand & Logo */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex flex-col justify-center items-center"
-            >
-              <motion.div
-                animate={{ 
-                  y: [0, -12, 0],
-                }}
-                transition={{ 
-                  duration: 5, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="text-center"
-              >
-                <h2 
-                  className="text-3xl md:text-4xl font-black text-gold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-gold via-gold to-gold/70 mb-4"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  Sai Digital Services
-                </h2>
-                <p 
-                  className="text-gold dark:text-gold/80 text-sm italic mb-6 font-semibold uppercase tracking-wide"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  Digital Excellence
-                </p>
-              </motion.div>
-            </motion.div>
+        {/* ── Top accent bar ── */}
+        <div
+          style={{
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent 0%, #D4AF37 40%, #F5E27D 60%, transparent 100%)',
+            marginBottom: '0',
+          }}
+        />
 
-            {/* Right Column - Phone & Social Quick Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center md:items-end text-center md:text-right"
-            >
-              <div className="mb-8">
-                <div className="inline-flex items-center gap-3 mb-4 p-4 bg-gold/10 rounded-lg border border-gold/30">
-                  <FiPhone className="text-gold" size={24} />
-                  <h3 
-                    className="text-gold font-bold uppercase tracking-widest text-sm"
-                    style={{ fontFamily: 'var(--font-inter)' }}
-                  >
-                    Phone
-                  </h3>
-                </div>
-                <motion.a
-                  href="tel:+916304484048"
-                  className="text-gray-800 dark:text-gray-300 hover:text-gold transition-colors text-sm block font-semibold"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  +91 6304484048
-                </motion.a>
-              </div>
+        {/* ── Main grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 py-12 md:py-16">
 
-              <div>
-                <p 
-                  className="text-gray-700 dark:text-gray-500 text-sm mb-3 font-bold uppercase tracking-wide"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  Quick Links
-                </p>
-                <div className="flex gap-4 justify-center md:justify-end">
-                  <motion.a
-                    href="tel:+916304484048"
-                    className="group"
-                    whileHover={{ scale: 1.15, y: -4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    aria-label="Call"
-                  >
-                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
-                      <FiPhone className="text-gold" size={18} />
-                    </div>
-                  </motion.a>
-
-                  <motion.a
-                    href="https://wa.me/916304484048"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group"
-                    whileHover={{ scale: 1.15, y: -4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    aria-label="WhatsApp"
-                  >
-                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
-                      <FaWhatsapp className="text-gold" size={18} />
-                    </div>
-                  </motion.a>
-
-                  <motion.a
-                    href="https://www.instagram.com/sai_digital_services_?igsh=aGR0NHowcTR0cmk0"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group"
-                    whileHover={{ scale: 1.15, y: -4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    aria-label="Instagram"
-                  >
-                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
-                      <FaInstagram className="text-gold" size={18} />
-                    </div>
-                  </motion.a>
-
-                  <motion.a
-                    href="mailto:sairavula1919@gmail.com"
-                    className="group"
-                    whileHover={{ scale: 1.15, y: -4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    aria-label="Email"
-                  >
-                    <div className="p-3 bg-gold/15 group-hover:bg-gold/25 rounded-full border border-gold/40 group-hover:border-gold/70 transition-all duration-300">
-                      <FiMail className="text-gold" size={18} />
-                    </div>
-                  </motion.a>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Bottom Copyright Section */}
+          {/* Brand column — 5 cols */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-center pt-4"
+            className="md:col-span-5"
           >
-            <p 
-              className="text-gray-700 dark:text-gray-500 text-xs font-semibold"
-              style={{ fontFamily: 'var(--font-inter)' }}
+            {/* Logo text */}
+            <div className="mb-4">
+              <span
+                style={{
+                  fontFamily: 'var(--font-jakarta)',
+                  fontWeight: 800,
+                  fontSize: '1.375rem',
+                  background: 'linear-gradient(135deg, #D4AF37 0%, #F5E27D 50%, #B8860B 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                Sai Digital Services
+              </span>
+            </div>
+
+            {/* Tagline */}
+            <p
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: '0.9rem',
+                color: '#94A3B8',
+                lineHeight: 1.7,
+                marginBottom: '1.5rem',
+                maxWidth: '300px',
+              }}
             >
-              © {currentYear} Sai Digital Services. All rights reserved.
+              Websites that grow businesses. SEO &amp; digital marketing from Mogaltur, West Godavari,&nbsp;AP.
             </p>
+
+            {/* Social icons */}
+            <div className="flex gap-2.5 flex-wrap">
+              {socials.map(({ icon: Icon, href, label, external, color, bg }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  aria-label={label}
+                  title={label}
+                  className="group flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-250"
+                  style={{ backgroundColor: bg, border: `1px solid ${color}30` }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = color + '25';
+                    e.currentTarget.style.borderColor = color + '80';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = bg;
+                    e.currentTarget.style.borderColor = color + '30';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <Icon size={16} aria-hidden="true" style={{ color }} />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Quick links — 3 cols */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="md:col-span-3"
+          >
+            <h3
+              style={{
+                fontFamily: 'var(--font-jakarta)',
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.12em',
+                color: '#D4AF37',
+                marginBottom: '1.25rem',
+              }}
+            >
+              Quick Links
+            </h3>
+            <ul className="space-y-2.5">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1.5 transition-all duration-200"
+                    style={{
+                      fontFamily: 'var(--font-inter)',
+                      fontSize: '0.9rem',
+                      color: '#94A3B8',
+                      fontWeight: 500,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#F5E27D';
+                      e.currentTarget.style.transform = 'translateX(3px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#94A3B8';
+                      e.currentTarget.style.transform = 'translateX(0)';
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        width: '4px',
+                        height: '4px',
+                        borderRadius: '50%',
+                        backgroundColor: '#D4AF37',
+                        flexShrink: 0,
+                        opacity: 0.6,
+                      }}
+                      aria-hidden="true"
+                    />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Contact — 4 cols */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="md:col-span-4"
+          >
+            <h3
+              style={{
+                fontFamily: 'var(--font-jakarta)',
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.12em',
+                color: '#D4AF37',
+                marginBottom: '1.25rem',
+              }}
+            >
+              Get In Touch
+            </h3>
+
+            <div className="space-y-3.5">
+              {/* Phone */}
+              <a
+                href="tel:+916304484048"
+                className="flex items-center gap-3 group"
+                aria-label="Call +91 6304484048"
+                style={{ textDecoration: 'none' }}
+                onMouseEnter={(e) => e.currentTarget.querySelector('span').style.color = '#F5E27D'}
+                onMouseLeave={(e) => e.currentTarget.querySelector('span').style.color = '#94A3B8'}
+              >
+                <div
+                  className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0"
+                  style={{ background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.2)' }}
+                  aria-hidden="true"
+                >
+                  <FiPhone size={13} style={{ color: '#34D399' }} />
+                </div>
+                <span
+                  style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: '#94A3B8', transition: 'color 0.2s' }}
+                >
+                  +91 6304484048
+                </span>
+              </a>
+
+              {/* Email */}
+              <a
+                href="mailto:sairavula1919@gmail.com"
+                className="flex items-center gap-3 group"
+                aria-label="Email sairavula1919@gmail.com"
+                style={{ textDecoration: 'none' }}
+                onMouseEnter={(e) => e.currentTarget.querySelector('span').style.color = '#F5E27D'}
+                onMouseLeave={(e) => e.currentTarget.querySelector('span').style.color = '#94A3B8'}
+              >
+                <div
+                  className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0"
+                  style={{ background: 'rgba(96,165,250,0.1)', border: '1px solid rgba(96,165,250,0.2)' }}
+                  aria-hidden="true"
+                >
+                  <FiMail size={13} style={{ color: '#60A5FA' }} />
+                </div>
+                <span
+                  className="break-all"
+                  style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: '#94A3B8', transition: 'color 0.2s' }}
+                >
+                  sairavula1919@gmail.com
+                </span>
+              </a>
+
+              {/* Location */}
+              <div className="flex items-start gap-3">
+                <div
+                  className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0 mt-0.5"
+                  style={{ background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.2)' }}
+                  aria-hidden="true"
+                >
+                  <FiMapPin size={13} style={{ color: '#D4AF37' }} />
+                </div>
+                <address
+                  className="not-italic"
+                  style={{ fontFamily: 'var(--font-inter)', fontSize: '0.875rem', color: '#94A3B8', lineHeight: 1.6 }}
+                >
+                  Mogaltur, West Godavari<br />
+                  Andhra Pradesh 534281, India
+                </address>
+              </div>
+            </div>
           </motion.div>
         </div>
+
+        {/* ── Bottom bar ── */}
+        <div
+          className="py-5 flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+        >
+          <p
+            style={{ fontFamily: 'var(--font-inter)', fontSize: '0.8125rem', color: '#475569' }}
+          >
+            © {year}{' '}
+            <span style={{ color: '#94A3B8', fontWeight: 600 }}>Sai Digital Services</span>
+            . All rights reserved.
+          </p>
+
+          <div className="flex items-center gap-1.5">
+            <span
+              style={{
+                display: 'inline-block',
+                width: '6px',
+                height: '6px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #D4AF37, #F5E27D)',
+              }}
+              aria-hidden="true"
+            />
+            <p
+              style={{ fontFamily: 'var(--font-inter)', fontSize: '0.8125rem', color: '#475569' }}
+            >
+              Mogaltur · West Godavari · Andhra Pradesh
+            </p>
+          </div>
+        </div>
+
       </div>
     </footer>
   );

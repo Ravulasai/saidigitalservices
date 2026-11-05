@@ -26,9 +26,9 @@ export default function FAQPage() {
           >
             <h1 
               className="text-4xl md:text-5xl lg:text-6xl mb-4 tracking-tight"
-              style={{ fontFamily: 'var(--font-cormorant)' }}
+              style={{ fontFamily: 'var(--font-manrope)' }}
             >
-              Frequently Asked <span className="text-gold italic" style={{ fontFamily: 'var(--font-cormorant)' }}>Questions</span>
+              Frequently Asked <span className="text-gold italic" style={{ fontFamily: 'var(--font-manrope)' }}>Questions</span>
             </h1>
             <p 
               className="text-black dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"

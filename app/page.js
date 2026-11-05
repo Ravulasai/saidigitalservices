@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import HeroBanner from '@/components/HeroBanner';
 import About from '@/components/About';
 import Services from '@/components/Services';
+import Testimonials from '@/components/Testimonials';
 
 // Lazy load below-fold sections
 const WhyChooseUs = dynamic(() => import('@/components/WhyChooseUs'));
@@ -9,9 +10,9 @@ const FAQ = dynamic(() => import('@/components/FAQ'));
 const Contact = dynamic(() => import('@/components/Contact'));
 
 export const metadata = {
-  title: 'Sai Digital Services | Website Development & SEO Services in Andhra Pradesh & Telangana',
+  title: 'Sai Digital Services | Website Development & Digital Marketing in Mogaltur, West Godavari',
   description:
-    'Professional website development, SEO optimization and digital marketing services in Andhra Pradesh, Telangana and Hyderabad. 3+ years experience. Call +91 6304484048.',
+    'Professional website development, SEO optimization and digital marketing services in Mogaltur, West Godavari, Andhra Pradesh. 3+ years experience. Call +91 6304484048.',
   alternates: { canonical: 'https://saidigitalservices.in' },
 };
 
@@ -143,6 +144,7 @@ export default function Home() {
       <About />
       <Services />
       <WhyChooseUs />
+      <Testimonials />
       <FAQ />
       <Contact />
     </>
