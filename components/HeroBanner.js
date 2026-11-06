@@ -108,42 +108,65 @@ export default function HeroBanner() {
 
       <Navbar />
 
-      {/* Centred typewriter headline — shifted 50px up on desktop */}
-      <div className="relative z-10 flex-1 flex items-center justify-center px-4 md:mb-[50px]">
-        <h1
-          aria-label="Sai Digital Services"
-          style={{
-            fontFamily: 'var(--font-jakarta)',
-            fontWeight: 800,
-            fontSize: 'clamp(1.6rem, 5.5vw, 4rem)',
-            letterSpacing: '-0.025em',
-            lineHeight: 1.15,
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 45%, #F5E27D 70%, #B8860B 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
-          {displayed}
-          {/* Blinking cursor — hides after typing is done */}
-          <span
-            aria-hidden="true"
+      {/* Centred typewriter headline + tagline — shifted 50px up via translateY */}
+      <div
+        className="relative z-10 flex-1 flex items-center justify-center px-4"
+        style={{ transform: 'translateY(-80px)' }}
+      >
+        <div className="flex flex-col items-center gap-1">
+          {/* Typewriter headline */}
+          <h1
+            aria-label="Sai Digital Services"
             style={{
-              display: 'inline-block',
-              width: '3px',
-              height: '0.85em',
-              marginLeft: '4px',
-              borderRadius: '2px',
-              verticalAlign: 'middle',
-              background: 'linear-gradient(180deg, #FFD700, #D4AF37)',
-              opacity: done
-                ? cursorVisible ? 1 : 0   // keep blinking after done
-                : 1,                       // always on while typing
-              transition: done ? 'opacity 0.1s' : 'none',
+              fontFamily: 'var(--font-jakarta)',
+              fontWeight: 800,
+              fontSize: 'clamp(1.6rem, 5.5vw, 4rem)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.15,
+              textAlign: 'center',
+              background: 'linear-gradient(135deg, #D4AF37 0%, #FFD700 45%, #F5E27D 70%, #B8860B 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
             }}
-          />
-        </h1>
+          >
+            {displayed}
+            {/* Blinking cursor */}
+            <span
+              aria-hidden="true"
+              style={{
+                display: 'inline-block',
+                width: '3px',
+                height: '0.85em',
+                marginLeft: '4px',
+                borderRadius: '2px',
+                verticalAlign: 'middle',
+                background: 'linear-gradient(180deg, #FFD700, #D4AF37)',
+                opacity: done ? (cursorVisible ? 1 : 0) : 1,
+                transition: done ? 'opacity 0.1s' : 'none',
+              }}
+            />
+          </h1>
+
+          {/* Italic tagline — fades in after typing completes */}
+          <p
+            aria-label="Give our brains to your business"
+            style={{
+              fontFamily: 'var(--font-inter)',
+              fontStyle: 'italic',
+              fontWeight: 400,
+              fontSize: 'clamp(0.85rem, 2vw, 1.125rem)',
+              color: 'rgba(255,255,255,0.75)',
+              textAlign: 'center',
+              letterSpacing: '0.01em',
+              opacity: done ? 1 : 0,
+              transform: done ? 'translateY(0)' : 'translateY(8px)',
+              transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s',
+            }}
+          >
+            Give our brains to your business
+          </p>
+        </div>
       </div>
 
       <WhatsAppFloat />
