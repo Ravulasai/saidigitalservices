@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { FiChevronDown } from 'react-icons/fi';
 
@@ -43,7 +43,9 @@ export default function FAQ({ showHeading = true }) {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [openIndex, setOpenIndex] = useState(0);
   const { resolvedTheme } = useTheme();
-  const dark = resolvedTheme === 'dark';
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const dark = mounted && resolvedTheme === 'dark';
 
   /* Colour tokens that differ between modes */
   const colors = {
